@@ -1,8 +1,12 @@
-const ADMIN_EMAIL = "eoindatuganvillarin@gmail.com";
-const PASSWORD_SALT = "wp-festverse-v1";
-const PASSWORD_HASH =
-  "442fc814e044e9b6bcd2757f8b6a3696362336f20ca4668f60c90cefe1c21565";
 export const SESSION_COOKIE = "wp_admin_session";
+
+function getEnv(name: string): string {
+  const value = process.env[name];
+  if (!value || value.length === 0) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
+  return value;
+}
 
 function toHex(buffer: ArrayBuffer): string {
   const bytes = new Uint8Array(buffer);
@@ -20,11 +24,7 @@ async function sha256Hex(input: string): Promise<string> {
 }
 
 function getSecret(): string {
-  const secret = process.env.SESSION_SECRET;
-  if (secret && secret.length > 0) {
-    return secret;
-  }
-  return "wp-festverse-fallback-secret-change-me";
+  return getEnv("SESSION_SECRET");
 }
 
 async function hmacSign(payload: string): Promise<string> {
@@ -50,16 +50,16 @@ export async function verifyCredentials(
   if (!email || !password) {
     return false;
   }
-  if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
+  if (email.trim().toLowerCase() !== getEnv("ADMIN_EMAIL")) {
     return false;
   }
-  const hash = await sha256Hex(PASSWORD_SALT + ":" + password);
-  return hash === PASSWORD_HASH;
+  const hash = await sha256Hex(getEnv("PASSWORD_SALT") + ":" + password);
+  return hash === getEnv("PASSWORD_HASH");
 }
 
 export async function createSessionToken(): Promise<string> {
   const payload = JSON.stringify({
-    email: ADMIN_EMAIL,
+    email: getEnv("ADMIN_EMAIL"),
     exp: Date.now() + 1000 * 60 * 60 * 24 * 7,
   });
   const encoded = btoa(payload);
