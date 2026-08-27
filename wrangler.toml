@@ -3,3 +3,8 @@ compatibility_date = "2026-07-01"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 
+[[kv_namespaces]]
+binding = "CMS_KV"
+id = "9f330ac78b5044be82452d3f47ea73de"
+
+
