@@ -30,7 +30,7 @@ Wallhaven and the Reddit community feeds are keyless, so the site works with zer
 
 ## Cloudflare Pages deployment
 
-1. Push to GitHub (`amvprosox/wallpaper-festverse-site`).
+1. Push to GitHub (`festverse/wallpaper-festverse-site`).
 2. Cloudflare dashboard: Workers and Pages, Create, Pages, Connect to Git, pick the repo.
 3. Framework preset: Next.js. Build command: `npx @cloudflare/next-on-pages@1`. Build output directory: `.vercel/output/static`.
 4. Add the environment variables above under Settings, Environment variables.
