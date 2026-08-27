@@ -109,7 +109,7 @@ export default async function HomePage({ searchParams }: PageProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: cms.site && cms.site.name ? cms.site.name : "MURAL",
+    name: cms.site && cms.site.name ? cms.site.name : "FEST",
     url: siteUrl,
     potentialAction: {
       "@type": "SearchAction",

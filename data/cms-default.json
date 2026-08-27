@@ -1,8 +1,8 @@
 {
   "site": {
-    "name": "MURAL",
+    "name": "FEST",
     "tagline": "Unlimited free wallpapers in every resolution",
-    "logoText": "MURAL",
+    "logoText": "FEST",
     "accentColor": "#e8a95c"
   },
   "hero": {
@@ -13,18 +13,38 @@
     "ctaHref": "#gallery"
   },
   "rows": [
-    { "id": "nature", "title": "Landscapes and wild places", "query": "mountain landscape" },
-    { "id": "space", "title": "Deep space and night skies", "query": "galaxy nebula stars" },
-    { "id": "minimal", "title": "Minimal and abstract", "query": "minimal abstract" },
+    {
+      "id": "nature",
+      "title": "Landscapes and wild places",
+      "query": "mountain landscape"
+    },
+    {
+      "id": "space",
+      "title": "Deep space and night skies",
+      "query": "galaxy nebula stars"
+    },
+    {
+      "id": "minimal",
+      "title": "Minimal and abstract",
+      "query": "minimal abstract"
+    },
     { "id": "city", "title": "Cities after dark", "query": "city night neon" },
-    { "id": "anime", "title": "Anime and illustration", "query": "anime scenery" },
+    {
+      "id": "anime",
+      "title": "Anime and illustration",
+      "query": "anime scenery"
+    },
     { "id": "cars", "title": "Cars and machines", "query": "sports car" },
     { "id": "ocean", "title": "Oceans and coastlines", "query": "ocean waves" },
     { "id": "forest", "title": "Forests and fog", "query": "misty forest" },
     { "id": "dark", "title": "Dark and moody", "query": "dark moody" },
     { "id": "animals", "title": "Wildlife", "query": "wild animal" },
     { "id": "gaming", "title": "Gaming worlds", "query": "video game art" },
-    { "id": "architecture", "title": "Architecture and lines", "query": "modern architecture" }
+    {
+      "id": "architecture",
+      "title": "Architecture and lines",
+      "query": "modern architecture"
+    }
   ],
   "menus": {
     "header": [
@@ -35,7 +55,11 @@
     "footer": [
       { "id": "f1", "label": "4K wallpapers", "href": "/?resolution=4k" },
       { "id": "f2", "label": "8K wallpapers", "href": "/?resolution=8k" },
-      { "id": "f3", "label": "Phone wallpapers", "href": "/?orientation=portrait" },
+      {
+        "id": "f3",
+        "label": "Phone wallpapers",
+        "href": "/?orientation=portrait"
+      },
       { "id": "f4", "label": "Most popular", "href": "/?sort=popular" }
     ]
   },
@@ -43,7 +67,7 @@
     "text": "Every wallpaper is delivered in its original full quality with no download quota and no account. Images belong to their original creators."
   },
   "seo": {
-    "title": "MURAL - Free 4K and 8K Wallpapers, No Limits",
+    "title": "FEST - Free 4K and 8K Wallpapers, No Limits",
     "description": "Unlimited free wallpapers. Filter by resolution, orientation and color, see the real file size, then download the full quality original. No account, no quota.",
     "ogImage": "",
     "canonicalBase": "",

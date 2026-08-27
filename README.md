@@ -1,4 +1,4 @@
-# MURAL - Wallpaper Site
+# FEST - Wallpaper Site
 
 Production Next.js 14 App Router wallpaper site powered by the Wallhaven API, which requires no API key and has no download quota. Deployed on Cloudflare Pages via next-on-pages.
 

@@ -25,7 +25,7 @@ const siteUrl =
 export async function generateMetadata(): Promise<Metadata> {
   const cms = await getCmsContent();
   const seo = cms.seo || {};
-  const title = seo.title || "MURAL - Free 4K and 8K Wallpapers, No Limits";
+  const title = seo.title || "FEST - Free 4K and 8K Wallpapers, No Limits";
   const description =
     seo.description ||
     "Unlimited free wallpapers. Filter by resolution, orientation and color, see the real file size, then download the full quality original. No account, no quota.";
@@ -33,9 +33,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const customIcons = seo.icons || {};
   return {
     metadataBase: new URL(base),
-    title: { default: title, template: "%s | MURAL" },
+    title: { default: title, template: "%s | FEST" },
     description,
-    applicationName: "MURAL",
+    applicationName: "FEST",
     manifest: "/manifest.webmanifest",
     icons: {
       icon: [
@@ -62,7 +62,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       type: "website",
-      siteName: "MURAL",
+      siteName: "FEST",
       url: base,
       title,
       description,
@@ -113,7 +113,7 @@ export default async function RootLayout({
           <GlassEffects />
           <Header
             logoText={
-              cms.site && cms.site.logoText ? cms.site.logoText : "MURAL"
+              cms.site && cms.site.logoText ? cms.site.logoText : "FEST"
             }
             menu={
               cms.menus && Array.isArray(cms.menus.header)
@@ -129,7 +129,7 @@ export default async function RootLayout({
                 ? cms.menus.footer
                 : []
             }
-            siteName={cms.site && cms.site.name ? cms.site.name : "MURAL"}
+            siteName={cms.site && cms.site.name ? cms.site.name : "FEST"}
           />
         </div>
       </body>
