@@ -35,7 +35,7 @@ Wallhaven and the Reddit community feeds are keyless, so the site works with zer
 3. Framework preset: Next.js. Build command: `npx @cloudflare/next-on-pages@1`. Build output directory: `.vercel/output/static`.
 4. Add the environment variables above under Settings, Environment variables.
 5. Settings, Functions, Compatibility flags: add `nodejs_compat` for Production and Preview.
-6. Bindings: create a KV namespace, bind it as `CMS_KV`; create an R2 bucket `wallpaper-prosox-media`, bind it as `MEDIA_R2`. Update the KV id in `wrangler.toml`.
+6. Bindings: create a KV namespace, bind it as `CMS_KV`; create an R2 bucket `wallpaper-festverse-media`, bind it as `MEDIA_R2`. Update the KV id in `wrangler.toml`.
 7. Every push to `main` auto deploys.
 
 Local Cloudflare preview:
