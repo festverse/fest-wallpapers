@@ -29,7 +29,7 @@ export default function Footer({ text, menu, siteName }: { text: string; menu: M
         </nav>
       </div>
       <p className="mx-auto mt-12 max-w-7xl text-xs opacity-40">
-        {year} {siteName}. Images belong to their original creators.
+        {year} {siteName}. Designed &amp; Developed by Utsav Vasava.
       </p>
     </footer>
   );
