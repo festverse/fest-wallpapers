@@ -1,0 +1,8 @@
+name = "wallpaper-prosox-site"
+compatibility_date = "2026-07-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[[kv_namespaces]]
+binding = "CMS_KV"
+id = "467770638bbf44c5bed56db2626e8d08"
