@@ -1,6 +1,7 @@
 const ADMIN_EMAIL = "eoindatuganvillarin@gmail.com";
-const PASSWORD_SALT = "wp-prosox-v1";
-const PASSWORD_HASH = "442fc814e044e9b6bcd2757f8b6a3696362336f20ca4668f60c90cefe1c21565";
+const PASSWORD_SALT = "wp-festverse-v1";
+const PASSWORD_HASH =
+  "442fc814e044e9b6bcd2757f8b6a3696362336f20ca4668f60c90cefe1c21565";
 export const SESSION_COOKIE = "wp_admin_session";
 
 function toHex(buffer: ArrayBuffer): string {
@@ -23,7 +24,7 @@ function getSecret(): string {
   if (secret && secret.length > 0) {
     return secret;
   }
-  return "wp-prosox-fallback-secret-change-me";
+  return "wp-festverse-fallback-secret-change-me";
 }
 
 async function hmacSign(payload: string): Promise<string> {
@@ -32,13 +33,20 @@ async function hmacSign(payload: string): Promise<string> {
     new TextEncoder().encode(getSecret()),
     { name: "HMAC", hash: "SHA-256" },
     false,
-    ["sign"]
+    ["sign"],
   );
-  const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(payload));
+  const signature = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    new TextEncoder().encode(payload),
+  );
   return toHex(signature);
 }
 
-export async function verifyCredentials(email: string, password: string): Promise<boolean> {
+export async function verifyCredentials(
+  email: string,
+  password: string,
+): Promise<boolean> {
   if (!email || !password) {
     return false;
   }
@@ -50,13 +58,18 @@ export async function verifyCredentials(email: string, password: string): Promis
 }
 
 export async function createSessionToken(): Promise<string> {
-  const payload = JSON.stringify({ email: ADMIN_EMAIL, exp: Date.now() + 1000 * 60 * 60 * 24 * 7 });
+  const payload = JSON.stringify({
+    email: ADMIN_EMAIL,
+    exp: Date.now() + 1000 * 60 * 60 * 24 * 7,
+  });
   const encoded = btoa(payload);
   const signature = await hmacSign(encoded);
   return encoded + "." + signature;
 }
 
-export async function verifySessionToken(token: string | undefined): Promise<boolean> {
+export async function verifySessionToken(
+  token: string | undefined,
+): Promise<boolean> {
   if (!token) {
     return false;
   }

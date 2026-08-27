@@ -15,14 +15,24 @@ interface PageProps {
   params: { source: string; id: string };
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wallpaper-prosox-site.pages.dev";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://wallpaper-festverse-site.pages.dev";
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const wallpaper = await fetchWallpaperById(params.source, params.id);
   if (!wallpaper) {
     return { title: "Wallpaper not found" };
   }
-  const title = wallpaper.title.slice(0, 60) + " - " + wallpaper.width + "x" + wallpaper.height + " Wallpaper";
+  const title =
+    wallpaper.title.slice(0, 60) +
+    " - " +
+    wallpaper.width +
+    "x" +
+    wallpaper.height +
+    " Wallpaper";
   const description =
     "Download " +
     wallpaper.title.slice(0, 80) +
@@ -31,13 +41,28 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     "x" +
     wallpaper.height +
     ". Full quality original, no account needed.";
-  const canonical = siteUrl + "/wallpaper/" + wallpaper.source + "/" + encodeURIComponent(wallpaper.id);
+  const canonical =
+    siteUrl +
+    "/wallpaper/" +
+    wallpaper.source +
+    "/" +
+    encodeURIComponent(wallpaper.id);
   return {
     title,
     description,
     alternates: { canonical },
-    openGraph: { title, description, url: canonical, images: [{ url: wallpaper.previewUrl }] },
-    twitter: { card: "summary_large_image", title, description, images: [wallpaper.previewUrl] }
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      images: [{ url: wallpaper.previewUrl }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [wallpaper.previewUrl],
+    },
   };
 }
 
@@ -46,9 +71,22 @@ export default async function WallpaperPage({ params }: PageProps) {
   if (!wallpaper) {
     notFound();
   }
-  const alt = altFromWallpaper(wallpaper.title, wallpaper.tags, wallpaper.width, wallpaper.height);
-  const canonical = siteUrl + "/wallpaper/" + wallpaper.source + "/" + encodeURIComponent(wallpaper.id);
-  const ratio = wallpaper.width > 0 && wallpaper.height > 0 ? wallpaper.width / wallpaper.height : 16 / 9;
+  const alt = altFromWallpaper(
+    wallpaper.title,
+    wallpaper.tags,
+    wallpaper.width,
+    wallpaper.height,
+  );
+  const canonical =
+    siteUrl +
+    "/wallpaper/" +
+    wallpaper.source +
+    "/" +
+    encodeURIComponent(wallpaper.id);
+  const ratio =
+    wallpaper.width > 0 && wallpaper.height > 0
+      ? wallpaper.width / wallpaper.height
+      : 16 / 9;
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -61,22 +99,41 @@ export default async function WallpaperPage({ params }: PageProps) {
       height: wallpaper.height,
       encodingFormat: "image/jpeg",
       acquireLicensePage: canonical,
-      creditText: wallpaper.source
+      creditText: wallpaper.source,
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Wallpapers", item: siteUrl + "/" },
-        { "@type": "ListItem", position: 2, name: wallpaper.title.slice(0, 60), item: canonical }
-      ]
-    }
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Wallpapers",
+          item: siteUrl + "/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: wallpaper.title.slice(0, 60),
+          item: canonical,
+        },
+      ],
+    },
   ];
 
   return (
-    <main className="mx-auto max-w-6xl px-5 pb-16 pt-28 sm:px-8" style={{ ["--accent" as string]: wallpaper.color }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs opacity-60">
+    <main
+      className="mx-auto max-w-6xl px-5 pb-16 pt-28 sm:px-8"
+      style={{ ["--accent" as string]: wallpaper.color }}
+    >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <nav
+        aria-label="Breadcrumb"
+        className="mb-6 flex items-center gap-1.5 text-xs opacity-60"
+      >
         <Link href="/" className="hover:opacity-100">
           Wallpapers
         </Link>
@@ -86,7 +143,10 @@ export default async function WallpaperPage({ params }: PageProps) {
       <div className="grid gap-8 lg:grid-cols-[1.7fr,1fr]">
         <div
           className="relative overflow-hidden rounded-3xl bg-ink-800"
-          style={{ aspectRatio: String(ratio), backgroundColor: wallpaper.color }}
+          style={{
+            aspectRatio: String(ratio),
+            backgroundColor: wallpaper.color,
+          }}
         >
           <Image
             src={wallpaper.previewUrl}
@@ -119,7 +179,9 @@ export default async function WallpaperPage({ params }: PageProps) {
           <DownloadPanel wallpaper={wallpaper} />
           {wallpaper.tags.length > 0 ? (
             <div>
-              <p className="font-heading text-xs font-bold uppercase tracking-[0.18em] opacity-50">Related</p>
+              <p className="font-heading text-xs font-bold uppercase tracking-[0.18em] opacity-50">
+                Related
+              </p>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {wallpaper.tags.slice(0, 10).map((tag) => (
                   <Link

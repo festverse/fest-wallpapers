@@ -15,7 +15,9 @@ interface PageProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wallpaper-prosox-site.pages.dev";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://wallpaper-festverse-site.pages.dev";
 
 function firstParam(value: string | string[] | undefined): string {
   if (Array.isArray(value)) {
@@ -41,7 +43,9 @@ function describeFilters(searchParams: PageProps["searchParams"]): string {
   return parts.join(" ");
 }
 
-export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
   const filterLabel = describeFilters(searchParams);
   const params = new URLSearchParams();
   ["q", "resolution", "orientation", "color", "sort"].forEach((key) => {
@@ -50,7 +54,9 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
       params.set(key, value);
     }
   });
-  const canonical = params.toString() ? siteUrl + "/?" + params.toString() : siteUrl + "/";
+  const canonical = params.toString()
+    ? siteUrl + "/?" + params.toString()
+    : siteUrl + "/";
   if (!filterLabel) {
     return { alternates: { canonical } };
   }
@@ -64,7 +70,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
     description,
     alternates: { canonical },
     openGraph: { title, description, url: canonical },
-    twitter: { title, description }
+    twitter: { title, description },
   };
 }
 
@@ -77,11 +83,16 @@ async function pickFeatured(): Promise<Wallpaper | null> {
       color: "",
       source: "wallhaven",
       sort: "popular",
-      page: 1
+      page: 1,
     });
-    const candidates = result.wallpapers.filter((w) => w.width >= w.height && w.width >= 1920);
+    const candidates = result.wallpapers.filter(
+      (w) => w.width >= w.height && w.width >= 1920,
+    );
     const light = candidates.find(
-      (w) => w.fileSizeBytes !== null && w.fileSizeBytes < 1600000 && w.width <= 4000
+      (w) =>
+        w.fileSizeBytes !== null &&
+        w.fileSizeBytes < 1600000 &&
+        w.width <= 4000,
     );
     return light || candidates[0] || result.wallpapers[0] || null;
   } catch (error) {
@@ -90,8 +101,8 @@ async function pickFeatured(): Promise<Wallpaper | null> {
 }
 
 export default async function HomePage({ searchParams }: PageProps) {
-  const hasFilters = ["q", "resolution", "orientation", "color", "sort"].some((key) =>
-    firstParam(searchParams[key])
+  const hasFilters = ["q", "resolution", "orientation", "color", "sort"].some(
+    (key) => firstParam(searchParams[key]),
   );
   const cms = await getCmsContent();
   const filterLabel = describeFilters(searchParams);
@@ -102,17 +113,24 @@ export default async function HomePage({ searchParams }: PageProps) {
     url: siteUrl,
     potentialAction: {
       "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: siteUrl + "/?q={search_term_string}" },
-      "query-input": "required name=search_term_string"
-    }
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: siteUrl + "/?q={search_term_string}",
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 
   const featured = hasFilters ? null : await pickFeatured();
-  const rows = !hasFilters && cms.rows && Array.isArray(cms.rows) ? cms.rows : [];
+  const rows =
+    !hasFilters && cms.rows && Array.isArray(cms.rows) ? cms.rows : [];
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {!hasFilters ? (
         <>
           <Hero
@@ -122,7 +140,7 @@ export default async function HomePage({ searchParams }: PageProps) {
                 title: "One wall. No limits.",
                 subtitle: "",
                 ctaLabel: "Browse",
-                ctaHref: "#gallery"
+                ctaHref: "#gallery",
               }
             }
             featured={featured}
@@ -148,13 +166,18 @@ export default async function HomePage({ searchParams }: PageProps) {
           </p>
         </div>
       )}
-      <section className="mx-auto max-w-7xl px-5 pt-12 sm:px-8" aria-label="Wallpaper gallery">
+      <section
+        className="mx-auto max-w-7xl px-5 pt-12 sm:px-8"
+        aria-label="Wallpaper gallery"
+      >
         {!hasFilters ? (
           <div className="mb-6 flex items-baseline gap-4 border-t border-current/[0.05] pt-6">
             <span className="font-heading text-xs font-extrabold tabular-nums opacity-30">
               {String(rows.length + 1).padStart(2, "0")}
             </span>
-            <h2 className="font-heading text-xl font-bold tracking-tight sm:text-2xl">The full wall</h2>
+            <h2 className="font-heading text-xl font-bold tracking-tight sm:text-2xl">
+              The full wall
+            </h2>
           </div>
         ) : null}
         <Suspense fallback={<GridSkeleton count={15} />}>

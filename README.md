@@ -16,11 +16,11 @@ npm run dev
 
 Fill `.env.local`:
 
-| Variable | Purpose |
-| --- | --- |
-| `SESSION_SECRET` | Long random string signing the admin session cookie |
-| `NEXT_PUBLIC_SITE_URL` | Canonical production URL |
-| `ALPHACODERS_API_KEY` | Optional. Free key from an Alphacoders account (about 100k queries per month); enables the Wallpaper Abyss source |
+| Variable               | Purpose                                                                                                           |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `SESSION_SECRET`       | Long random string signing the admin session cookie                                                               |
+| `NEXT_PUBLIC_SITE_URL` | Canonical production URL                                                                                          |
+| `ALPHACODERS_API_KEY`  | Optional. Free key from an Alphacoders account (about 100k queries per month); enables the Wallpaper Abyss source |
 
 Wallhaven and the Reddit community feeds are keyless, so the site works with zero keys. All requests proxy through edge route handlers with s-maxage caching so end users never hit the upstream services directly, and any source that fails is skipped without breaking the feed.
 
@@ -30,7 +30,7 @@ Wallhaven and the Reddit community feeds are keyless, so the site works with zer
 
 ## Cloudflare Pages deployment
 
-1. Push to GitHub (`festverse/mural-wallpapers`).
+1. Push to GitHub (`amvprosox/wallpaper-festverse-site`).
 2. Cloudflare dashboard: Workers and Pages, Create, Pages, Connect to Git, pick the repo.
 3. Framework preset: Next.js. Build command: `npx @cloudflare/next-on-pages@1`. Build output directory: `.vercel/output/static`.
 4. Add the environment variables above under Settings, Environment variables.
