@@ -59,16 +59,18 @@ export default function Header({ logoText, menu }: { logoText: string; menu: Men
             />
           </div>
         </form>
-        <ThemeToggle />
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-          className="flex h-10 w-10 items-center justify-center md:hidden"
-        >
-          {open ? <X size={20} strokeWidth={1.8} /> : <Menu size={20} strokeWidth={1.8} />}
-        </button>
+        <div className="ml-auto flex items-center gap-1 sm:ml-0">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+            className="flex h-10 w-10 items-center justify-center md:hidden"
+          >
+            {open ? <X size={20} strokeWidth={1.8} /> : <Menu size={20} strokeWidth={1.8} />}
+          </button>
+        </div>
       </div>
       {open ? (
         <div className="liquid-glass liquid-glass-strong mx-auto mt-2 max-w-7xl px-5 py-4 md:hidden">
