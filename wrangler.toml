@@ -7,4 +7,5 @@ pages_build_output_dir = ".vercel/output/static"
 binding = "CMS_KV"
 id = "9f330ac78b5044be82452d3f47ea73de"
 
-
+[vars]
+ALPHACODERS_API_KEY = "46f2a217fd526109ee156ce87b667eb5"
