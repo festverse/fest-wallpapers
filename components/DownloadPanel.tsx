@@ -53,7 +53,7 @@ export default function DownloadPanel({ wallpaper }: { wallpaper: Wallpaper }) {
       <div className="mt-5 flex flex-wrap items-center gap-4">
         <a
           href={downloadHref}
-          className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-extrabold uppercase tracking-[0.12em] text-ink-950 transition-transform hover:scale-[1.03] active:scale-95"
+          className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-extrabold uppercase tracking-[0.12em] text-white transition-transform hover:scale-[1.03] active:scale-95"
           style={{ background: "var(--accent)" }}
         >
           <Download size={16} strokeWidth={2.2} />
